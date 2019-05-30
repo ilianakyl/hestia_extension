@@ -23,3 +23,5 @@ fetch(`http://batesmotel.lvh.me:3000/spi/v3/get/jobs/${shortcode}/`, {
 // chrome.storage.sync.get([chrome_storage_key], function(responseult) {
 //   console.log('Value currently is ' + responseult.key);
 // });
+
+// 49d962d93e03722c70359d8910e5d870b005f23312552df900b25ebed775672b

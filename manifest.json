@@ -48,7 +48,7 @@
       ],
       "content_scripts": [ 
         { 
-            "matches": ["http://*/*","https://*/*"],
+            "matches": ["http://*.workablestg1.com/*", "https://*.workablestg1.com/*", "*://*.lvh.me/*"],
           "css": ["styles/main.css"], 
           "js": ["scripts/popup.js"] 
         } 
