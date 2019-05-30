@@ -17,11 +17,12 @@
         "contextMenus",
         "downloads",
         "alarms",
-        "idle"
+        "idle",
+        "storage"
       ],
     "browser_action": {
-        "default_title": "Hestia service"   
-    }, 
+        "default_title": "Hestia service"
+    },
     "icons": {
         "16": "images/hestia16.png",
         "32": "images/hestia32.png",
@@ -43,15 +44,16 @@
         "images/*.svg",
         "images/*.gif",
         "styles/*.css",
-        "frames/*.html", 
+        "frames/*.html",
         "scripts/*.js"
       ],
-      "content_scripts": [ 
-        { 
+      "content_scripts": [
+        {
             "matches": ["http://*.workablestg1.com/*", "https://*.workablestg1.com/*", "*://*.lvh.me/*"],
-          "css": ["styles/main.css"], 
-          "js": ["scripts/popup.js"] 
-        } 
-      ], 
+            "css": ["styles/main.css"],
+            "js": ["scripts/popup.js"],
+            "run_at": "document_end"
+        }
+      ],
     "manifest_version": 2
   }

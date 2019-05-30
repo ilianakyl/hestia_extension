@@ -1,62 +1,70 @@
-console.log('test')
-document.addEventListener('click', function (event) {
-console.log('here')
-	// If the clicked element doesn't have the right selector, bail
-	if (event.target.matches('#clickIt')){
-        console.log('here2')
-        // Don't follow the link
-        event.preventDefault();
+window.addEventListener('click', function (event){
+    event.preventDefault;
 
-        // Log the clicked element in the console
-        console.log(event.target);
+    switch(event.target.id) {
+      case 'save-job':
+        save_job();
+        break;
+      case 'dashboard':
+        console.log("dashboard")
+        load_dashboard()
+        break;
     }
+})
 
-    
-    if (event.target.matches('#save')){
-        console.log('here3')
-        // Don't follow the link
-        event.preventDefault();
 
-        let url = window.location.protocol+"//"+window.location.host
-        let shortcode = window.location.pathname.replace(/\/j\//,'');
-        let chrome_storage_key = `job_data_${shortcode}`
-        
-        fetch(`${url}/spi/v3/get${shortcode}/`, {
-            headers: {"Authorization": "Bearer 49d962d93e03722c70359d8910e5d870b005f23312552df900b25ebed775672b"},
-            type: 'GET',
-            Accept: "application/json",
-            contentType: "application/json",
-        })
-        .then(response => response.json())
-        .then(response => {
-          chrome.storage.sync.set({key: response}, function() {
-            console.log(key);
-            console.log(response);
-          });
-        });
-        var new_div  = document.getElementById ('hestiaDiv');
-        var xhr = new XMLHttpRequest();
-  
-    xhr.onreadystatechange = function (e) { 
+function save_job(){
+    let url = window.location.protocol + "//" + window.location.host
+    let shortcode = window.location.pathname.replace(/\/j\//,'');
+    let chrome_storage_key = `job_data_${shortcode}`
+
+    fetch(`${url}/spi/v3/jobs/${shortcode}/`, {
+        headers: {"Authorization": "Bearer kwdikos"},
+        type: 'GET',
+        Accept: "application/json",
+        contentType: "application/json",
+    })
+    .then(response => response.json())
+    .then(response => {
+      response.applied_at = new Date().toLocaleString();
+      chrome.storage.sync.set({chrome_storage_key: response}, function() {
+        console.log(chrome_storage_key);
+        console.log(response);
+      });
+    })
+}
+
+
+function load_dashboard(){
+    var hestia_div  = document.getElementById('hestiaDiv');
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function (e) {
       if (xhr.readyState == 4 && xhr.status == 200) {
-        new_div.innerHTML = xhr.responseText;
+        hestia_div.innerHTML = xhr.responseText;
       }
     }
-  
-    xhr.open("GET", chrome.extension.getURL("frames/list.html"), true);
+
+    xhr.open("GET", chrome.extension.getURL("frames/saved_jobs.html"), true);
     xhr.setRequestHeader('Content-type', 'text/html');
     xhr.send();
+}
 
-    }
-	
 
-}, false);
+function fill_jobs(){
+    let saved_jobs  = document.getElementById ('saved-jobs-table');
 
-document.addEventListener("submit", function (event) {
-    alert('here')
-    console.log('here')
-    event.preventDefault();
-        
-    
-    }, false);
+    var NewRow = saved_jobs.insertRow(0);
+    var Newcell1 = NewRow.insertCell(0);
+    var Newcell2 = NewRow.insertCell(1);
+    Newcell1.innerHTML = "col1";
+    Newcell2.innerHTML = "col2";
+}
+
+
+// document.addEventListener("submit", function (event) {
+//     alert('here')
+//     console.log('here')
+//     event.preventDefault();
+// }, false);
 
