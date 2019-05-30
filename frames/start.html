@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Click it</title>
-        <link rel="stylesheet" href="../styles/main.css">
+        <!-- <link rel="stylesheet" href="styles/main.css"> -->
     </head>
 
 
@@ -12,5 +12,16 @@
         <a id="save" class="btn primary">Save</a>
         <a id="view" class="btn secondary">View</a>
     </body>
-    <script src="../scripts/popup.js"></script>
+    <!-- <script src="scripts/popup.js"></script>
+    <script>
+        console.log('here')
+    function loadScript(scriptName, callback) {
+        console.log('here2')
+        var scriptEl = document.createElement('script');
+        scriptEl.src = chrome.extension.getURL('scripts/' + scriptName + '.js');
+        scriptEl.addEventListener('load', callback, false);
+        document.head.appendChild(scriptEl);
+    }
+    loadScript('popup.js', callback)
+</script> -->
 </html>

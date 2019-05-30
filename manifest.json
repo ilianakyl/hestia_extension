@@ -5,7 +5,7 @@
     "background": {
         "scripts": [
           "background_script.js"
-        ]
+            ]
       },
     "permissions": [
         "http://*/*",
@@ -43,7 +43,15 @@
         "images/*.svg",
         "images/*.gif",
         "styles/*.css",
-        "frames/*.html"
+        "frames/*.html", 
+        "scripts/*.js"
       ],
+      "content_scripts": [ 
+        { 
+            "matches": ["http://*/*","https://*/*"],
+          "css": ["styles/main.css"], 
+          "js": ["scripts/popup.js"] 
+        } 
+      ], 
     "manifest_version": 2
   }

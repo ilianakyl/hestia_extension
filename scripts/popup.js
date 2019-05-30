@@ -14,3 +14,22 @@ console.log('here')
 	
 
 }, false);
+
+document.addEventListener("submit", function (event) {
+    alert('here')
+    console.log('here')
+    event.preventDefault();
+        // // If the clicked element doesn't have the right selector, bail
+        // if (event.target.matches('#clickIt')){
+        //     console.log('here2')
+        //     // Don't follow the link
+        //     event.preventDefault();
+    
+        //     // Log the clicked element in the console
+        //     console.log(event.target);
+        // }
+    
+        
+    
+    }, false);
+
