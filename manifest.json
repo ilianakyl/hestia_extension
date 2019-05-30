@@ -1,0 +1,11 @@
+{
+    "name": "Hestia extension",
+    "version": "1.0",
+    "description": "Keep my appications tidy",
+    "permissions": ["https://*.google.com/", "activeTab"],
+    "browser_action": {
+        "default_title": "Hestia service",      
+        "default_popup": "popup.html"        
+    }, 
+    "manifest_version": 2
+  }
