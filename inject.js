@@ -1,6 +1,7 @@
 (function() {
 
-	var new_div  = document.createElement ('div');
+    var new_div  = document.createElement ('div');
+    new_div.setAttribute("id", "hestiaDiv");
 
 var xhr = new XMLHttpRequest();
   
