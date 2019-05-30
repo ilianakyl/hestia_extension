@@ -21,7 +21,7 @@ console.log('here')
         let shortcode = window.location.pathname.replace(/\/j\//,'');
         let chrome_storage_key = `job_data_${shortcode}`
         
-        fetch(`${shortcode}/spi/v3/get${shortcode}/`, {
+        fetch(`${url}/spi/v3/get${shortcode}/`, {
             headers: {"Authorization": "Bearer 49d962d93e03722c70359d8910e5d870b005f23312552df900b25ebed775672b"},
             type: 'GET',
             Accept: "application/json",
