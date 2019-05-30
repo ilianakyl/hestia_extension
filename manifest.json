@@ -2,10 +2,42 @@
     "name": "Hestia extension",
     "version": "1.0",
     "description": "Keep my appications tidy",
-    "permissions": ["https://*.google.com/", "activeTab"],
+    "background": {
+        "scripts": [
+          "background_script.js"
+        ]
+      },
+    "permissions": [
+        "http://*/*",
+        "https://*/*",
+        "tabs",
+        "identity",
+        "cookies",
+        "background",
+        "contextMenus",
+        "downloads",
+        "alarms",
+        "idle"
+      ],
     "browser_action": {
-        "default_title": "Hestia service",      
-        "default_popup": "popup.html"        
+        "default_title": "Hestia service"   
     }, 
+    "externally_connectable": {
+        "matches": [
+          "*://*.lvh.me/*",
+          "*://localhost/*"
+        ]
+      },
+      "web_accessible_resources": [
+        "fonts/*.woff",
+        "fonts/*.ttf",
+        "fonts/*.svg",
+        "fonts/*.eot",
+        "images/*.png",
+        "images/*.svg",
+        "images/*.gif",
+        "styles/*.css",
+        "frames/*.html"
+      ],
     "manifest_version": 2
   }
