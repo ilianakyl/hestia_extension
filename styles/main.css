@@ -1,0 +1,64 @@
+@import url("https://use.typekit.net/isu1vjb.css");
+
+*,
+*:before,
+*:after {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+img {
+  max-width: 100%;
+}
+
+
+body {
+  font-size: 20px;
+  line-height: 22px;
+  color: #333E49;
+  font-family: proxima-nova, sans-serif;
+  -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape while allowing user zoom */
+  overflow-x: hidden;
+  background-color: #ffffff;
+}
+
+/*-------------Buttons----------------*/
+
+.btn {
+  font-size: 20px;
+  line-height: 22px;
+  font-weight: 700;
+  border-radius: 8px;
+  display: inline-block;
+  min-width: 160px;
+  height: 48px;
+  padding: 10px 16px;
+  transition: all 0.3s ease-out;
+  text-align: center;
+}
+
+.primary {
+  background-color: #00756A;
+  border: 2px solid #00756A;
+  color: white;
+}
+
+.primary:hover {
+  background: #18a369;
+  border: 2px solid #18a369;
+}
+
+.secondary {
+  border: 2px solid #00756A;
+  color: #00756A;
+}
+
+.secondary:hover {
+  border: 2px solid #18a369;
+  color: #18a369;
+}
