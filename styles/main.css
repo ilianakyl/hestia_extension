@@ -8,16 +8,20 @@
   box-sizing: border-box;
 }
 
-html {
+#hestiaDiv {
   font-size: 62.5%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: blue;
 }
 
-img {
+#hestiaDiv > img {
   max-width: 100%;
 }
 
 
-body {
+#hestiaDiv > body {
   font-size: 20px;
   line-height: 22px;
   color: #333E49;
@@ -29,7 +33,7 @@ body {
 
 /*-------------Buttons----------------*/
 
-.btn {
+#hestiaDiv > .btn {
   font-size: 20px;
   line-height: 22px;
   font-weight: 700;
@@ -42,23 +46,23 @@ body {
   text-align: center;
 }
 
-.primary {
+#hestiaDiv > .primary {
   background-color: #00756A;
   border: 2px solid #00756A;
   color: white;
 }
 
-.primary:hover {
+#hestiaDiv > .primary:hover {
   background: #18a369;
   border: 2px solid #18a369;
 }
 
-.secondary {
+#hestiaDiv > .secondary {
   border: 2px solid #00756A;
   color: #00756A;
 }
 
-.secondary:hover {
+#hestiaDiv > .secondary:hover {
   border: 2px solid #18a369;
   color: #18a369;
 }
