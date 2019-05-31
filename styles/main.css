@@ -183,6 +183,7 @@
   background-image: url('chrome-extension://__MSG_@@extension_id__/images/hestia.svg');
   background-repeat: no-repeat;
   background-size: contain;
+  background-position: center center;
 }
 
 #hestiaDiv .curved-bg{
@@ -229,6 +230,7 @@
   position: relative;
   z-index: 3;
   cursor: pointer;
+  text-transform: none;
 }
 
 #hestiaDiv .primary {
