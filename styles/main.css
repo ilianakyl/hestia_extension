@@ -142,10 +142,11 @@
   left: 0;
   overflow-x: hidden;
   overflow-y: scroll;
-  /*background-image: url('chrome-extension://__MSG_@@extension_id__/images/bush.png');
+  padding-bottom: 30vh;
+  background-image: url('chrome-extension://__MSG_@@extension_id__/images/blob-tango.svg');
   background-repeat: no-repeat;
-  background-position: -100px -100px;
-  background-size: 30% auto;*/
+  background-size: contain;
+  background-position: bottom left;
 }
 
 .job-view-desc,
@@ -195,7 +196,7 @@
   background-position: center center;
 }
 
-#hestiaDiv .curved-bg{
+#hestiaDiv .curved-bg {
   background-image: url('chrome-extension://__MSG_@@extension_id__/images/blob.svg');
   background-repeat: no-repeat;
   background-size: contain;
@@ -208,6 +209,7 @@
   left: 0;
   z-index: 0;
 }
+
 /*------------Alignments--------------*/
 #hestiaDiv .all-centered {
   display: flex;
@@ -423,6 +425,7 @@
   padding: 15px 35px;
   text-decoration: none;
   background-color: #f0f6f6;
+  border-bottom: 8px solid #f9f9f9;
 }
 
 #hestiaDiv .accordion-content {

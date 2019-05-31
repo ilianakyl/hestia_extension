@@ -135,6 +135,8 @@ function render_saved_job(job_id){
       company_name.innerHTML = result[saved_job_key].company_name
 
       job_location = document.getElementById('hestia-job-location')
+      var key = "telecommuting";
+      delete result[saved_job_key].location[key]; 
       loc_string = Object.values(result[saved_job_key].location).join(", ")
       job_location.innerHTML = loc_string
 
