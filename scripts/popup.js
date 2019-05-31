@@ -16,7 +16,7 @@ window.addEventListener('click', function (event){
         load_dashboard();
         break;
       case 'hestia-back-to-start':
-            console.log("start")
+        console.log("start")
         load_start_page();
         break;
 
@@ -65,10 +65,7 @@ function save_job(){
       let job_id = id_from_spi_key(response.id)
       let chrome_storage_key = `saved_job_${job_id}`
 
-      chrome.storage.sync.set({chrome_storage_key: response}, function() {
-        console.log(chrome_storage_key);
-        console.log(response);
-      });
+      chrome.storage.sync.set({ [chrome_storage_key]: response })
     })
 
     load_show();
@@ -99,10 +96,9 @@ function load_dashboard(){
     .then(response => {
       hestia_div.innerHTML = response
     })
-
-    hestia_div.addEventListener('load', function (event){
-      load_dashboard()
-    })
+    .then(function() {
+      fill_saved_jobs();
+    });
 }
 
 
@@ -121,14 +117,16 @@ function load_start_page(){
     xhr.send();
 }
 
-function fill_jobs(){
-    let saved_jobs  = document.getElementById ('saved-jobs-table');
+function fill_saved_jobs(){
+    let saved_jobs = document.getElementById ('saved-jobs');
 
-    var NewRow = saved_jobs.insertRow(0);
-    var Newcell1 = NewRow.insertCell(0);
-    var Newcell2 = NewRow.insertCell(1);
-    Newcell1.innerHTML = "col1";
-    Newcell2.innerHTML = "col2";
+    chrome.storage.sync.get(null, function(items) {
+        var allKeys = Object.keys(items)
+        // allKeys.forEach
+    });
+
+    var job_link = document.createElement('a');
+    job_link.href = "www.wtf.com"
 }
 
 
@@ -172,9 +170,7 @@ if (typeof parent.getElementsByTagName('label')[0] !== "undefined"){
 
         var job_id = window.location.pathname.match( numberPattern )
         let chrome_storage_key = `candidate_${job_id}`
-      chrome.storage.sync.set({chrome_storage_key: JSON.stringify(obj)}, function() {
-        console.log(chrome_storage_key);
-        console.log(JSON.stringify(obj));
+        chrome.storage.sync.set({[chrome_storage_key]: obj}, function() {
       });
 	console.log("thats it");
 
