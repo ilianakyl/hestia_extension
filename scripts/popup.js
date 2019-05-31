@@ -69,61 +69,70 @@ function save_job(){
 
       let job_id = id_from_spi_key(response.id)
       let chrome_storage_key = `saved_job_${job_id}`
-      let chrome_storage_key_stage = `stage_${job_id}`
+      let job_stage_key = `stage_${job_id}`
 
       response.saved_at = new Date().toLocaleString();
       chrome.storage.sync.set({ [chrome_storage_key]: response })
       console.log("job saved")
 
-      chrome.storage.sync.set({[chrome_storage_key_stage]: 'interview'}, function() {
-        console.log(chrome_storage_key_stage);
+      chrome.storage.sync.set({[job_stage_key]: 'interview'}, function() {
+        console.log(job_stage_key);
       });
+<<<<<<< Updated upstream
       load_show(job_id);
     })
 
     
+=======
+      console.log("job state saved")
+
+      load_show(job_id);
+    })
+>>>>>>> Stashed changes
 }
 
 
-function load_show(hestiaid){
+function load_show(job_id){
     var hestia_div  = document.getElementById('hestiaDiv');
-    var xhr = new XMLHttpRequest();
 
-    xhr.onreadystatechange = function (e) {
-      if (xhr.readyState == 4 && xhr.status == 200) {
-        hestia_div.innerHTML = xhr.responseText;
-      }
-    }
+    fetch(chrome.extension.getURL("frames/show.html"))
+    .then(response => response.text())
+    .then(response => {
+      hestia_div.innerHTML = response
+    })
+    .then(function() {
+        fill_saved_job(job_id)
+    });
+}
 
-    xhr.open("GET", chrome.extension.getURL("frames/show.html"), true);
-    xhr.setRequestHeader('Content-type', 'text/html');
-    xhr.send();
+function fill_saved_job(job_id){
+    saved_job_key = `saved_job_${job_id}`
+    chrome.storage.sync.get([saved_job_key], function(result) {
+      description = document.getElementById('hestia-job-description')
+      description.innerHTML = result[saved_job_key].description
 
-    var numberPattern = /\d+/g;
+      job_title = document.getElementById('hestia-job-title')
+      job_title.innerHTML = result[saved_job_key].title
+    })
 
-        var job_id = window.location.pathname.match( numberPattern )
-    let chrome_storage_key_stage  = `stage_${hestiaid}`
-    chrome.storage.sync.get([chrome_storage_key_stage], function(result) {
-      debugger
-      if(result.key == 'interview'){
+    let job_stage_key = `stage_${job_id}`
+    chrome.storage.sync.get([job_stage_key], function(result) {
+
+    if(result.key == 'interview'){
         var xhr2 = new XMLHttpRequest();
 
-    xhr2.onreadystatechange = function (e) {
-      if (xhr2.readyState == 4 && xhr2.status == 200) {
-        hestia_div.innerHTML = xhr.responseText;
-      }
-    }
+        xhr2.onreadystatechange = function (e) {
+            if (xhr2.readyState == 4 && xhr2.status == 200) {
+                hestia_div.innerHTML = xhr.responseText;
+            }
+        }
 
-    xhr2.open("GET", 'https://www.careercup.com/#stq=java', true);
-    xhr2.setRequestHeader('Content-type', 'text/html');
-    xhr2.send();
-
+        xhr2.open("GET", 'https://www.careercup.com/#stq=java', true);
+        xhr2.setRequestHeader('Content-type', 'text/html');
+        xhr2.send();
       };
     });
-
-
 }
-
 
 function load_dashboard(){
     var hestia_div  = document.getElementById('hestiaDiv');
@@ -164,11 +173,8 @@ function fill_saved_jobs(){
 
           chrome.storage.sync.get([key], function(result) {
             let job_link = document.createElement('a')
-            // job_link.href = result[key].url
-            // job_link.data['ui-id'] = id_from_spi_key(result[key].id)
             job_link.setAttribute("hediaid", id_from_spi_key(result[key].id));
             job_link.innerHTML = result[key].title
-            // job_link.class = 'hestialink'
             job_link.classList.add('hestialink');
             saved_jobs.appendChild(job_link)
           })
