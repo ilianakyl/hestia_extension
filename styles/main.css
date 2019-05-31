@@ -169,17 +169,17 @@
   display: block;
 }
 
-#hestia-candidate-info ul >li:first-child,
-#hestia-candidate-info ul > li:nth-child(2) {
+#hestia-candidate-info ul >li:first-child > span,
+#hestia-candidate-info ul > li:nth-child(2) > span {
   font-weight: 700;
 }
 
-#hestia-candidate-info ul > li:nth-child(3) {
+#hestia-candidate-info ul > li:nth-child(3) > span{
   font-weight: 700;
   color: #0c546c;
 }
 
-#hestia-candidate-info ul > li:nth-child(4) {
+#hestia-candidate-info ul > li:nth-child(4) > span{
   font-weight: 700;
   color: #ff5e16;
 }
