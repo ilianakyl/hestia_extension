@@ -50,6 +50,8 @@
   font-weight: 700;
   font-family: proxima-nova, sans-serif;
   margin-bottom: 24px;
+  -webkit-animation: fadein 0.5s; /* Safari, Chrome and Opera > 12.1 */
+  animation: fadein 0.5s;
 }
 
 #hestiaDiv h5 {
@@ -77,6 +79,7 @@
   margin: 32px auto;
 }
 
+/*----------Decorative staff----------*/
 #hestiaDiv .welcome-illu {
   width: 160px;
   height: 160px;
@@ -87,6 +90,19 @@
   background-size: contain;
 }
 
+#hestiaDiv .curved-bg{
+  background-image: url('chrome-extension://__MSG_@@extension_id__/images/blob.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom left;
+  width: 100%;
+  height: 100%;
+  max-height: 40vh;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+}
 /*------------Alignments--------------*/
 #hestiaDiv .all-centered {
   display: flex;
@@ -115,6 +131,8 @@
   padding: 10px 16px;
   transition: all 0.3s ease-out;
   text-align: center;
+  position: relative;
+  z-index: 3;
 }
 
 #hestiaDiv .primary {
