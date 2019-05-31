@@ -63,6 +63,14 @@
   text-transform: uppercase;
 }
 
+#hestiaDiv p {
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 400;
+  font-family: proxima-nova, sans-serif;
+  margin-bottom: 16px;
+}
+
 /*------------Containers--------------*/
 #hestiaDiv .cta-container{
   width: 100%;
@@ -133,6 +141,7 @@
   text-align: center;
   position: relative;
   z-index: 3;
+  cursor: pointer;
 }
 
 #hestiaDiv .primary {
@@ -195,4 +204,17 @@
 @-webkit-keyframes fadein {
   from { opacity: 0; }
   to   { opacity: 1; }
+}
+
+
+.accordion-toggle {
+  display: block;
+}
+
+.accordion-content {
+  display: none;
+}
+
+.accordion-content.active {
+  display: block;
 }
