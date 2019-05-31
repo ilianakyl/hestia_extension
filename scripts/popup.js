@@ -146,7 +146,7 @@ function getCandidateInfo(event){
         for(var i = 0 ; i < elements.length ; i++){
             var item = elements.item(i);
             if (elements.item(i).type != 'hidden'){
-                var label = '';   //why?
+                var label = '';   
             if (elements.item(i).placeholder != ""){
                 var label = elements.item(i).placeholder
 
