@@ -135,11 +135,10 @@ function fill_jobs(){
 var ele = document.getElementById('new_candidate');
 if (ele){
 ele.addEventListener("submit", function (event) {
-     alert('here')
      console.log('here')
      event.preventDefault();
      getCandidateInfo(event);
-     ele.submit();
+    //  ele.submit();
  }, false);
 }
 
@@ -148,11 +147,33 @@ function getCandidateInfo(event){
         var obj ={};
         for(var i = 0 ; i < elements.length ; i++){
             var item = elements.item(i);
-            obj[item.name] = item.value;
+            if (elements.item(i).type != 'hidden'){
+                debugger
+                var label = '';
+            if (elements.item(i).placeholder != ""){
+                var label = elements.item(i).placeholder 
+            }else{
+
+                if (elements.item(i).parentElement.className == "form-group"){
+                    parent = elements.item(i).parentElement
+                }else{
+                    parent = elements.item(i).parentElement.parentElement
+                }
+if (typeof parent.getElementsByTagName('label')[0] !== "undefined"){
+                var label = parent.getElementsByTagName('label')[0].innerText
+}
+            }
+
+            obj[item.name] = [label, item.value];
+        }
         }
 
-      chrome.storage.sync.set({'candidate': JSON.stringify(obj)}, function() {
-        console.log('candidate');
+        var numberPattern = /\d+/g;
+
+        var job_id = window.location.pathname.match( numberPattern )
+        let chrome_storage_key = `candidate_${job_id}`
+      chrome.storage.sync.set({chrome_storage_key: JSON.stringify(obj)}, function() {
+        console.log(chrome_storage_key);
         console.log(JSON.stringify(obj));
       });
 	console.log("thats it");
