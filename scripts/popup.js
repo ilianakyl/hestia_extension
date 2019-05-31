@@ -147,6 +147,44 @@ function render_saved_job(job_id){
       date_saved.innerHTML = 'Saved at: ' + result[saved_job_key].saved_at
     })
 
+
+    saved_candidate_key = `candidate_${job_id}`
+    chrome.storage.sync.get([saved_candidate_key], function(result) {
+      console.log("cand profile test")
+
+      candidate_email = document.getElementById('hestia-cand-email')
+      job_title.innerHTML = result[saved_candidate_key]["candidate[email]"][1]
+
+      candidate_email = document.getElementById('hestia-cand-name')
+      job_title.innerHTML = result[saved_candidate_key]["candidate[firstname]"][1]
+
+      candidate_email = document.getElementById('hestia-cand-surname')
+      job_title.innerHTML = result[saved_candidate_key]["candidate[lastname]"][1]
+
+      candidate_email = document.getElementById('hestia-cand-email')
+      job_title.innerHTML = result[saved_candidate_key]["candidate[headline]"][1]
+
+      // xyma apo dw kai pera
+      candidate_ul = document.getElementById('hestia-candidate-ul')
+
+      el = document.createElement('li')
+      el.innerText = result[saved_candidate_key]["candidate[phone]"][1]
+      candidate_ul.appendChild(el)
+
+      el = document.createElement('li')
+      job_title.innerHTML = result[saved_candidate_key]["candidate[summary]"][1]
+      candidate_ul.appendChild(el)
+
+      el = document.createElement('li')
+      job_title.innerHTML = result[saved_candidate_key]["candidate[address]"][1]
+      candidate_ul.appendChild(el)
+
+      // el = document.createElement('li')
+      // job_title.innerHTML = result[saved_candidate_key]["candidate[cover_letter]"][1]
+      // candidate_ul.appendChild(el)
+
+    })
+
     let job_stage_key = `stage_saved`
     chrome.storage.sync.get([job_stage_key], function(items) {
       if(typeof items[job_stage_key] !== 'undefined'){
