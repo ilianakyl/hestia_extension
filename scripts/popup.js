@@ -22,6 +22,11 @@ window.addEventListener('click', function (event){
 
     }
 
+    if (event.target.classList.contains('hestialink')) {
+      load_show(event.target.getAttribute("hediaid"));
+    };
+
+
     //Bail if our clicked element doesn't have the class
     if (!event.target.classList.contains('accordion-toggle')) return;
 
@@ -75,11 +80,11 @@ function save_job(){
       });
     })
 
-    load_show();
+    load_show(job_id);
 }
 
 
-function load_show(){
+function load_show(hestiaid){
     var hestia_div  = document.getElementById('hestiaDiv');
     var xhr = new XMLHttpRequest();
 
@@ -96,7 +101,7 @@ function load_show(){
     var numberPattern = /\d+/g;
 
         var job_id = window.location.pathname.match( numberPattern )
-    let chrome_storage_key_stage  = `stage_216589369`
+    let chrome_storage_key_stage  = `stage_${hestiaid}`
     chrome.storage.sync.get([chrome_storage_key_stage], function(result) {
       debugger
       if(result.key == 'interview'){
@@ -158,7 +163,12 @@ function fill_saved_jobs(){
 
           chrome.storage.sync.get([key], function(result) {
             let job_link = document.createElement('a')
-            job_link.href = result[key].url
+            // job_link.href = result[key].url
+            // job_link.data['ui-id'] = id_from_spi_key(result[key].id)
+            job_link.setAttribute("hediaid", id_from_spi_key(result[key].id));
+            job_link.innerHTML = result[key].title
+            // job_link.class = 'hestialink'
+            job_link.classList.add('hestialink');
             saved_jobs.appendChild(job_link)
           })
         })
