@@ -183,7 +183,7 @@ ele.addEventListener("submit", function (event) {
      console.log('here')
      event.preventDefault();
      getCandidateInfo(event);
-    //  ele.submit();
+     ele.submit();
  }, false);
 }
 
@@ -201,12 +201,6 @@ function getCandidateInfo(event){
             }else{
                 if (elements.item(i).parentElement.className.trim() == "form-group"){
                     parent = elements.item(i).parentElement
-                    console.log("this is it")
-                    console.log(parent)
-                    if (elements.item(i).id.includes("date")){
-                                 console.log("NA MAI")
-                                             }
-
                 }else if (elements.item(i).parentElement.className == "form-group form-group--error"){
                     parent = elements.item(i).parentElement
                 }else{
@@ -215,13 +209,12 @@ function getCandidateInfo(event){
 
                 if (typeof parent.getElementsByTagName('label')[0] !== "undefined"){
                 var label = parent.getElementsByTagName('label')[0].innerText
-                console.log(label)
-                console.log(parent)
-                                    console.log("this is it too")
-
                 }
             }
             if (label !="" && item.value != "" && label != "* Name"){
+                if (typeof label == "undefined"){
+                    var label = "date";
+                }
             obj[item.name] = [label, item.value];
             }
         }
@@ -232,9 +225,6 @@ function getCandidateInfo(event){
         var job_id = window.location.pathname.match( numberPattern )
         let chrome_storage_key = `candidate_${job_id}`
         chrome.storage.sync.set({[chrome_storage_key]: obj}, function() {
-         console.log(obj)
          });
-	   console.log("thats it");
-
 }
 
