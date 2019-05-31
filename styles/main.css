@@ -13,27 +13,98 @@
   position: fixed;
   top: 0;
   right: 0;
-  background-color: blue;
-}
-
-#hestiaDiv > img {
-  max-width: 100%;
-}
-
-
-#hestiaDiv > body {
+  width: 50vw;
+  height: 100vh;
+  z-index: 3;
+  background-color: #ffffff;
+  -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape while allowing user zoom */
+  font-family: proxima-nova, sans-serif;
   font-size: 20px;
   line-height: 22px;
   color: #333E49;
-  font-family: proxima-nova, sans-serif;
-  -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape while allowing user zoom */
   overflow-x: hidden;
-  background-color: #ffffff;
+  overflow-y: scroll;
+  padding: 15px;
+  box-shadow: 0 5px 29px 3px rgba(0, 0, 0, 0.08);
 }
+
+#hestiaDiv img {
+  max-width: 100%;
+}
+
+/*------------Typography--------------*/
+
+#hestiaDiv h1 {
+  font-size: 40px;
+  line-height: 44px;
+  font-weight: 700;
+  font-family: proxima-nova, sans-serif;
+  margin-bottom: 32px;
+  -webkit-animation: fadein 0.5s; /* Safari, Chrome and Opera > 12.1 */
+  animation: fadein 0.5s;
+}
+
+#hestiaDiv h2 {
+  font-size: 32px;
+  line-height: 38px;
+  font-weight: 700;
+  font-family: proxima-nova, sans-serif;
+  margin-bottom: 24px;
+}
+
+#hestiaDiv h5 {
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 800;
+  font-family: proxima-nova, sans-serif;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+/*------------Containers--------------*/
+#hestiaDiv .cta-container{
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  align-self: center;
+  /* position: absolute;
+  bottom: 0;
+  left: 0; */
+  padding: 15px;
+  margin: 32px auto;
+}
+
+#hestiaDiv .welcome-illu {
+  width: 160px;
+  height: 160px;
+  margin: 0 auto;
+  display: block;
+  background-image: url('chrome-extension://__MSG_@@extension_id__/images/hestia.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+/*------------Alignments--------------*/
+#hestiaDiv .all-centered {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+#hestiaDiv .centered {
+  text-align: center;
+}
+
 
 /*-------------Buttons----------------*/
 
-#hestiaDiv > .btn {
+#hestiaDiv .btn {
   font-size: 20px;
   line-height: 22px;
   font-weight: 700;
@@ -46,23 +117,64 @@
   text-align: center;
 }
 
-#hestiaDiv > .primary {
+#hestiaDiv .primary {
   background-color: #00756A;
   border: 2px solid #00756A;
   color: white;
 }
 
-#hestiaDiv > .primary:hover {
+#hestiaDiv .primary:hover {
   background: #18a369;
   border: 2px solid #18a369;
 }
 
-#hestiaDiv > .secondary {
+#hestiaDiv .secondary {
   border: 2px solid #00756A;
   color: #00756A;
 }
 
-#hestiaDiv > .secondary:hover {
+#hestiaDiv .secondary:hover {
   border: 2px solid #18a369;
   color: #18a369;
+}
+
+/*-------------Colors---------------*/
+
+.eden {color: #0c546c;}
+.aegean-blue {color: #00b7cd;}
+.pine-green {color: #00756a;}
+.tango {color: #ff5e16;}
+.havelock-blue {color: #4385e0;}
+.east-bay {color: #4d52b1;}
+.oxford-blue {color: #333e49;}
+.thunderbird {color: #d5351a;}
+.supernova  {color: #ffca00;}
+.atlantis {color: #b1d540;}
+.irish-cofee {color: #683d26;}
+.valentino {color: #373656;}
+.valentino-l {color: #4b4a67;}
+.white-lilac {color: #f0f0fb;}
+.volcanic-ash {color: #636d77;}
+.shark-grey {color:#88929e;}
+.hit-grey {color:#c4cfde;}
+.sprout {color: #609230;}
+.snow-drift {color: #f7f9f8;}
+.aqua-haze {color:#e9f2f0;}
+.wistful {color: #979ad3;}
+.sherpa-blue {color: #00544c;}
+.polar {color: #f6fafd;}
+.mountain-meadow {color: #18a369;}
+.deep-sea-blue {color: #0d485c;}
+
+/*--------Animated elements----------*/
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
