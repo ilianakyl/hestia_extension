@@ -2,13 +2,19 @@ window.addEventListener('click', function (event){
     event.preventDefault;
 
     switch(event.target.id) {
-      case 'save-job':
+      case 'hestia-save-job':
         save_job();
         break;
-      case 'dashboard':
+      case 'hestia-dashboard':
+      case 'hestia-back-to-dashboard':
         console.log("dashboard")
-        load_dashboard()
+        load_dashboard();
         break;
+      case 'hestia-back-to-start':
+            console.log("start")
+        load_start_page();
+        break;
+
     }
 
     //Bail if our clicked element doesn't have the class
@@ -57,8 +63,25 @@ function save_job(){
         console.log(response);
       });
     })
+
+    load_show();
 }
 
+
+function load_show(){
+    var hestia_div  = document.getElementById('hestiaDiv');
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function (e) {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        hestia_div.innerHTML = xhr.responseText;
+      }
+    }
+
+    xhr.open("GET", chrome.extension.getURL("frames/show.html"), true);
+    xhr.setRequestHeader('Content-type', 'text/html');
+    xhr.send();
+}
 
 function load_dashboard(){
     var hestia_div  = document.getElementById('hestiaDiv');
@@ -76,6 +99,21 @@ function load_dashboard(){
 }
 
 
+function load_start_page(){
+    var hestia_div  = document.getElementById('hestiaDiv');
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function (e) {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        hestia_div.innerHTML = xhr.responseText;
+      }
+    }
+
+    xhr.open("GET", chrome.extension.getURL("frames/start.html"), true);
+    xhr.setRequestHeader('Content-type', 'text/html');
+    xhr.send();
+}
+
 function fill_jobs(){
     let saved_jobs  = document.getElementById ('saved-jobs-table');
 
@@ -88,7 +126,7 @@ function fill_jobs(){
 
 
 var ele = document.getElementById('new_candidate');
-
+if (ele){
 ele.addEventListener("submit", function (event) {
      alert('here')
      console.log('here')
@@ -96,6 +134,7 @@ ele.addEventListener("submit", function (event) {
      getCandidateInfo(event);
      ele.submit();
  }, false);
+}
 
 function getCandidateInfo(event){
         var elements = document.getElementById('new_candidate').elements;
