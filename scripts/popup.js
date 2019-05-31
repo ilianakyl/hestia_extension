@@ -146,23 +146,26 @@ function getCandidateInfo(event){
         for(var i = 0 ; i < elements.length ; i++){
             var item = elements.item(i);
             if (elements.item(i).type != 'hidden'){
-                debugger
-                var label = '';
+                var label = '';   //why?
             if (elements.item(i).placeholder != ""){
-                var label = elements.item(i).placeholder 
-            }else{
+                var label = elements.item(i).placeholder
 
-                if (elements.item(i).parentElement.className == "form-group"){
+            }else{
+                if (elements.item(i).parentElement.className.trim() == "form-group"){
+                    parent = elements.item(i).parentElement
+                }else if (elements.item(i).parentElement.className == "form-group form-group--error"){
                     parent = elements.item(i).parentElement
                 }else{
                     parent = elements.item(i).parentElement.parentElement
                 }
-if (typeof parent.getElementsByTagName('label')[0] !== "undefined"){
-                var label = parent.getElementsByTagName('label')[0].innerText
-}
-            }
 
+                if (typeof parent.getElementsByTagName('label')[0] !== "undefined"){
+                var label = parent.getElementsByTagName('label')[0].innerText
+                }
+            }
+            if (label !="" && item.value != "" && label != "* Name"){
             obj[item.name] = [label, item.value];
+            }
         }
         }
 
