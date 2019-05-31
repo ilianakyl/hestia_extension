@@ -119,7 +119,7 @@ function render_saved_job(job_id){
 
       job_url = document.getElementById('hestia-job-url')
       url = result[saved_job_key].shortlink.replace('https', 'http')
-      job_url.innerHTML = "Go to Job"
+      job_url.innerHTML = "Go to job"
       job_url.href = url
 
       date_saved = document.getElementById('hestia-date-saved')
