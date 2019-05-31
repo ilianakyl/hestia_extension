@@ -71,7 +71,7 @@ function save_job(){
       let chrome_storage_key = `saved_job_${job_id}`
       let job_stage_key = `stage_${job_id}`
 
-      response.saved_at = new Date().toLocaleString();
+      response.saved_at = new Date().toLocaleString()
       chrome.storage.sync.set({ [chrome_storage_key]: response })
       console.log("job saved")
 
@@ -105,6 +105,18 @@ function render_saved_job(job_id){
 
       job_title = document.getElementById('hestia-job-title')
       job_title.innerHTML = result[saved_job_key].title
+
+      job_location = document.getElementById('hestia-job-location')
+      loc_string = Object.values(result[saved_job_key].location).join(", ")
+      job_location.innerHTML = loc_string
+
+      job_url = document.getElementById('hestia-job-url')
+      url = result[saved_job_key].shortlink.replace('https', 'http')
+      job_url.innerHTML = url
+      job_url.href = url
+
+      date_saved = document.getElementById('hestia-date-saved')
+      date_saved.innerHTML = 'Saved At: ' + result[saved_job_key].saved_at
     })
 
     let job_stage_key = `stage_${job_id}`
