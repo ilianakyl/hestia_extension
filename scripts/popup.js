@@ -141,11 +141,22 @@ function render_saved_job(job_id){
       date_saved.innerHTML = 'Saved at: ' + result[saved_job_key].saved_at
     })
 
-    let job_stage_key = `stage_${job_id}`
-    chrome.storage.sync.get([job_stage_key], function(result) {
-
-      if(result[`stage_${job_id}`] == 'applied'){
-        var xhr2 = new XMLHttpRequest();
+    let job_stage_key = `stage_saved`
+    chrome.storage.sync.get([job_stage_key], function(items) {
+      if(typeof items[job_stage_key] !== 'undefined'){
+      all_saved = items[job_stage_key]
+        chrome.storage.sync.get(null, function(items) {
+          var all_keys = Object.keys(items)
+        all_keys.forEach(function(key) {
+          if(all_saved.includes(key)){
+            state_element = document.getElementById('hestia-job-state')
+            state_element.classList.add('saved');
+        }else{
+          state_element = document.getElementById('hestia-job-state')
+          state_element.classList.remove('saved');
+            state_element.classList.add('applied');
+            state_element.innerHTML = 'Applied'
+          var xhr2 = new XMLHttpRequest();
 
     xhr2.onreadystatechange = function (e) {
       if (xhr2.readyState == 4 && xhr2.status == 200) {
@@ -193,8 +204,66 @@ function render_saved_job(job_id){
     xhr2.open("GET", 'https://production-jobboard.apps.workableops.net/api/v1/jobs?query=java&location=&orderBy=RELEVANCE_DESC', true);
     xhr2.setRequestHeader('Content-type', 'text/html');
     xhr2.send();
+        }
+        })
+      })
     }
-  })
+    })
+
+  //   let job_stage_key = `stage_${job_id}`
+  //   chrome.storage.sync.get([job_stage_key], function(result) {
+
+  //     if(result[`stage_${job_id}`] == 'applied'){
+  //       var xhr2 = new XMLHttpRequest();
+
+  //   xhr2.onreadystatechange = function (e) {
+  //     if (xhr2.readyState == 4 && xhr2.status == 200) {
+  //       // var new_results  = document.createElement ('div');
+  //       // // new_results.classList.add('hidden');
+  //       // new_results.style.visibility= 'hidden';
+  //       // new_results.setAttribute("id", "hiddenResultsCareercup");
+  //       // new_results.innerHTML = xhr2.responseText;
+  //       // document.body.appendChild (new_results);
+  //       // alert('here')
+  //       // test = new_results.querySelectorAll('.st-result-text')
+  //       jobs = JSON.parse(xhr2.response).jobs;
+  //       for(var item in jobs) {
+  //         console.log(jobs[item].url);
+  //         console.log(jobs[item].title);
+  //       }
+
+  //       console.log(xhr2.responseText)
+  //       console.log(xhr2)
+  //       promoted_jobs = document.getElementById('tutorials')
+  //       var list = document.createElement('ul');
+
+  //       for(var item in jobs) {
+  //       // Create the list item:
+  //       var li = document.createElement('li');
+
+  //       // Set its contents:
+  //       var a = document.createElement('a')
+  //       a.classList.add('link-arrow');
+  //       a.innerHTML =`${jobs[item].title} - ${jobs[item].company.title}`
+  //       a.href = jobs[item].url
+  //       a.target = '_blank'
+  //       li.appendChild(a);
+
+  //       // Add it to the list:
+  //       list.appendChild(li);
+  //   }
+  //   promoted_jobs.appendChild(list);
+  //   // Finally, return the constructed list:
+  
+
+  //     }
+  //   }
+
+  //   xhr2.open("GET", 'https://production-jobboard.apps.workableops.net/api/v1/jobs?query=java&location=&orderBy=RELEVANCE_DESC', true);
+  //   xhr2.setRequestHeader('Content-type', 'text/html');
+  //   xhr2.send();
+  //   }
+  // })
 }
 
 function load_dashboard(){
@@ -261,7 +330,6 @@ function list_saved_jobs(){
 
     let job_stage_key_applied = `stage_applied`
     chrome.storage.sync.get([job_stage_key_applied], function(items) {
-      debugger
       if(typeof items[job_stage_key_applied] !== 'undefined'){
       all_applied = items[job_stage_key_applied]
         chrome.storage.sync.get(null, function(items) {
