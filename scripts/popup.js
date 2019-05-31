@@ -167,17 +167,17 @@ function render_saved_job(job_id){
       // xyma apo dw kai pera
       candidate_ul = document.getElementById('hestia-candidate-ul')
 
-      el = document.createElement('li')
+      el1 = document.createElement('li')
       el.innerText = result[saved_candidate_key]["candidate[phone]"][1]
-      candidate_ul.appendChild(el)
+      candidate_ul.appendChild(el1)
 
-      el = document.createElement('li')
+      el2 = document.createElement('li')
       job_title.innerHTML = result[saved_candidate_key]["candidate[summary]"][1]
-      candidate_ul.appendChild(el)
+      candidate_ul.appendChild(el2)
 
-      el = document.createElement('li')
+      el3 = document.createElement('li')
       job_title.innerHTML = result[saved_candidate_key]["candidate[address]"][1]
-      candidate_ul.appendChild(el)
+      candidate_ul.appendChild(el3)
 
       // el = document.createElement('li')
       // job_title.innerHTML = result[saved_candidate_key]["candidate[cover_letter]"][1]
