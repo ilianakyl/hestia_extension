@@ -185,6 +185,9 @@ function render_saved_job(job_id){
 
     })
 
+    document.getElementById('hestia-preparation-info').classList.add('showdiv');
+    document.getElementById('hestia-candidate-info').classList.add('showdiv');
+
     let job_stage_key = `stage_saved`
     chrome.storage.sync.get([job_stage_key], function(items) {
       if(typeof items[job_stage_key] !== 'undefined'){
