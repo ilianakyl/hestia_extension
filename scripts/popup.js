@@ -75,12 +75,14 @@ function save_job(){
       chrome.storage.sync.set({ [chrome_storage_key]: response })
       console.log("job saved")
 
-      chrome.storage.sync.set({[job_stage_key]: 'interview'}, function() {
+      chrome.storage.sync.set({[job_stage_key]: 'applied'}, function() {
         console.log(job_stage_key);
       });
       console.log("job state saved")
       load_show(job_id);
     })
+
+
 }
 
 
@@ -122,20 +124,57 @@ function render_saved_job(job_id){
     let job_stage_key = `stage_${job_id}`
     chrome.storage.sync.get([job_stage_key], function(result) {
 
-    if(result.key == 'interview'){
+      if(result[`stage_${job_id}`] == 'applied'){
         var xhr2 = new XMLHttpRequest();
 
-        xhr2.onreadystatechange = function (e) {
-            if (xhr2.readyState == 4 && xhr2.status == 200) {
-                hestia_div.innerHTML = xhr.responseText;
-            }
+    xhr2.onreadystatechange = function (e) {
+      if (xhr2.readyState == 4 && xhr2.status == 200) {
+        // var new_results  = document.createElement ('div');
+        // // new_results.classList.add('hidden');
+        // new_results.style.visibility= 'hidden';
+        // new_results.setAttribute("id", "hiddenResultsCareercup");
+        // new_results.innerHTML = xhr2.responseText;
+        // document.body.appendChild (new_results);
+        // alert('here')
+        // test = new_results.querySelectorAll('.st-result-text')
+        jobs = JSON.parse(xhr2.response).jobs;
+        for(var item in jobs) {
+          console.log(jobs[item].url);
+          console.log(jobs[item].title);
         }
 
-        xhr2.open("GET", 'https://www.careercup.com/#stq=java', true);
-        xhr2.setRequestHeader('Content-type', 'text/html');
-        xhr2.send();
-      };
-    });
+        console.log(xhr2.responseText)
+        console.log(xhr2)
+        promoted_jobs = document.getElementById('tutorials')
+        var list = document.createElement('ul');
+
+        for(var item in jobs) {
+        // Create the list item:
+        var li = document.createElement('li');
+
+        // Set its contents:
+        var a = document.createElement('a')
+        a.classList.add('link-arrow');
+        a.innerHTML =`${jobs[item].title} in ${jobs[item].company.title}`
+        a.href = jobs[item].url
+        a.target = '_blank'
+        li.appendChild(a);
+
+        // Add it to the list:
+        list.appendChild(li);
+    }
+    promoted_jobs.appendChild(list);
+    // Finally, return the constructed list:
+  
+
+      }
+    }
+
+    xhr2.open("GET", 'https://production-jobboard.apps.workableops.net/api/v1/jobs?query=java&location=&orderBy=RELEVANCE_DESC', true);
+    xhr2.setRequestHeader('Content-type', 'text/html');
+    xhr2.send();
+    }
+  })
 }
 
 function load_dashboard(){
@@ -193,7 +232,7 @@ ele.addEventListener("submit", function (event) {
      console.log('here')
      event.preventDefault();
      getCandidateInfo(event);
-    //  ele.submit();
+     ele.submit();
  }, false);
 }
 
@@ -222,6 +261,9 @@ function getCandidateInfo(event){
                 }
             }
             if (label !="" && item.value != "" && label != "* Name"){
+                if (typeof label == "undefined"){
+                    var label = "date";
+                }
             obj[item.name] = [label, item.value];
             }
         }
@@ -232,8 +274,6 @@ function getCandidateInfo(event){
         var job_id = window.location.pathname.match( numberPattern )
         let chrome_storage_key = `candidate_${job_id}`
         chrome.storage.sync.set({[chrome_storage_key]: obj}, function() {
-      });
-	console.log("thats it");
-
+         });
 }
 
