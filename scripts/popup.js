@@ -188,10 +188,9 @@ function render_saved_job(job_id){
       // job_title.innerHTML = result[saved_candidate_key]["candidate[cover_letter]"][1]
       // candidate_ul.appendChild(el)
 
+
     })
 
-    document.getElementById('hestia-preparation-info').classList.add('showdiv');
-    document.getElementById('hestia-candidate-info').classList.add('showdiv');
 
     let job_stage_key = `stage_saved`
     chrome.storage.sync.get([job_stage_key], function(items) {
@@ -205,6 +204,8 @@ function render_saved_job(job_id){
             state_element.classList.add('saved');
             state_element.innerHTML = 'Saved'
         }else{
+          document.getElementById('hestia-preparation-info').classList.add('showdiv');
+    document.getElementById('hestia-candidate-info').classList.add('showdiv');
           var state_element = document.getElementById('hestia-job-state')
           state_element.classList.remove('saved');
             state_element.classList.add('applied');
