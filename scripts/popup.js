@@ -78,9 +78,10 @@ function save_job(){
       chrome.storage.sync.set({[chrome_storage_key_stage]: 'interview'}, function() {
         console.log(chrome_storage_key_stage);
       });
+      load_show(job_id);
     })
 
-    load_show(job_id);
+    
 }
 
 
