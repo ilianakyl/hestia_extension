@@ -69,7 +69,8 @@ function save_job(){
 
       let job_id = id_from_spi_key(response.id)
       let chrome_storage_key = `saved_job_${job_id}`
-      let job_stage_key = `stage_${job_id}`
+      // let job_stage_key = `stage_${job_id}`
+      let job_stage_key = `stage_saved`
 
       response.saved_at = new Date().toLocaleString()
       response.company_name = window.location.hostname.split('.')[0].toUpperCase()
@@ -77,9 +78,23 @@ function save_job(){
       chrome.storage.sync.set({ [chrome_storage_key]: response })
       console.log("job saved")
 
-      chrome.storage.sync.set({[job_stage_key]: 'applied'}, function() {
-        console.log(job_stage_key);
+      chrome.storage.sync.get([job_stage_key], function(result) {
+        console.log('in')
+        new_list = result[job_stage_key]
+        if (typeof new_list == "undefined"){
+          var new_list = [];
+      }
+        new_list.push(`saved_job_${job_id}`)
+        chrome.storage.sync.set({[job_stage_key]: new_list}, function() {
+          console.log(job_stage_key);
+        });
       });
+      // console.log('in2')
+      // new_list.push(job_id)
+      
+      // chrome.storage.sync.set({[job_stage_key]: new_list}, function() {
+      //   console.log(job_stage_key);
+      // });
       console.log("job state saved")
       load_show(job_id);
     })
@@ -213,20 +228,64 @@ function load_start_page(){
 
 function list_saved_jobs(){
     let saved_jobs = document.getElementById('saved-jobs');
+    let applied_jobs = document.getElementById('applied-jobs');
 
-    chrome.storage.sync.get(null, function(items) {
-        var all_keys = Object.keys(items)
-
+    let job_stage_key = `stage_saved`
+    chrome.storage.sync.get([job_stage_key], function(items) {
+      if(typeof items[job_stage_key] !== 'undefined'){
+      all_saved = items[job_stage_key]
+        chrome.storage.sync.get(null, function(items) {
+          var all_keys = Object.keys(items)
         all_keys.forEach(function(key) {
-
+          if(all_saved.includes(key)){
           chrome.storage.sync.get([key], function(result) {
-            let job_link = document.createElement('a')
-            job_link.setAttribute("hediaid", id_from_spi_key(result[key].id));
-            job_link.innerHTML = result[key].title
-            job_link.classList.add('hestialink');
-            saved_jobs.appendChild(job_link)
+            var li = document.createElement('li');
+
+        // Set its contents:
+        var a = document.createElement('a')
+        a.classList.add('link-arrow');
+        a.target = '_blank'
+        a.setAttribute("hediaid", id_from_spi_key(result[key].id));
+        a.innerHTML = result[key].title
+        a.classList.add('hestialink');
+            
+        li.appendChild(a);
+        saved_jobs.appendChild(li)
+
           })
+        }
         })
+      })
+    }
+    })
+
+    let job_stage_key_applied = `stage_applied`
+    chrome.storage.sync.get([job_stage_key_applied], function(items) {
+      debugger
+      if(typeof items[job_stage_key_applied] !== 'undefined'){
+      all_applied = items[job_stage_key_applied]
+        chrome.storage.sync.get(null, function(items) {
+          var all_keys = Object.keys(items)
+        all_keys.forEach(function(key) {
+          if(all_applied.includes(key)){
+          chrome.storage.sync.get([key], function(result) {
+            var li = document.createElement('li');
+
+            // Set its contents:
+            var a = document.createElement('a')
+            a.classList.add('link-arrow');
+            a.target = '_blank'
+            a.setAttribute("hediaid", id_from_spi_key(result[key].id));
+            a.innerHTML = result[key].title
+            a.classList.add('hestialink');
+                
+            li.appendChild(a);
+            applied_jobs.appendChild(li)
+          })
+        }
+        })
+      })
+    }
     })
 }
 
@@ -280,5 +339,40 @@ function getCandidateInfo(event){
         let chrome_storage_key = `candidate_${job_id}`
         chrome.storage.sync.set({[chrome_storage_key]: obj}, function() {
          });
+
+         let job_stage_key = `stage_applied`
+         let job_stage_key_remove = `stage_saved`
+         chrome.storage.sync.get([job_stage_key], function(result) {
+          console.log('in')
+          new_list = result[job_stage_key]
+          if (typeof new_list == "undefined"){
+            var new_list = [];
+        }
+          new_list.push(`saved_job_${job_id}`)
+          chrome.storage.sync.set({[job_stage_key]: new_list}, function() {
+            console.log(job_stage_key);
+          });
+
+          chrome.storage.sync.get([job_stage_key_remove], function(result) {
+            console.log('in')
+            new_list = result[job_stage_key]
+            if (typeof new_list == "undefined"){
+              var new_list = [];
+          }
+          value = `saved_job_${job_id}`
+          new_list = new_list.filter(function(item) { 
+            return item !== value
+        })
+            chrome.storage.sync.set({[job_stage_key_remove]: new_list}, function() {
+              console.log(job_stage_key_remove);
+            });
+  
+            
+          });
+
+          arr = arr.filter(function(item) { 
+            return item !== value
+        })
+        });
 }
 
