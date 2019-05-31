@@ -152,19 +152,19 @@ function render_saved_job(job_id){
 
     saved_candidate_key = `candidate_${job_id}`
     chrome.storage.sync.get([saved_candidate_key], function(result) {
-      console.log("cand profile test")
+      // console.log("cand profile test")
 
-      candidate_email = document.getElementById('hestia-cand-email')
-      candidate_email.innerHTML = result[saved_candidate_key]["candidate[email]"][1]
+      // candidate_email = document.getElementById('hestia-cand-email')
+      // candidate_email.innerHTML = result[saved_candidate_key]["candidate[email]"][1]
 
-      date_applied = document.getElementById('hestia-date-applied')
-      date_applied.innerHTML = new Date().toLocaleString()
+      // date_applied = document.getElementById('hestia-date-applied')
+      // date_applied.innerHTML = new Date().toLocaleString()
 
-      name = document.getElementById('hestia-cand-name')
-      name.innerHTML = result[saved_candidate_key]["candidate[firstname]"][1]
+      // name = document.getElementById('hestia-cand-name')
+      // name.innerHTML = result[saved_candidate_key]["candidate[firstname]"][1]
 
-      surname = document.getElementById('hestia-cand-surname')
-      surname.innerHTML = result[saved_candidate_key]["candidate[lastname]"][1]
+      // surname = document.getElementById('hestia-cand-surname')
+      // surname.innerHTML = result[saved_candidate_key]["candidate[lastname]"][1]
 
       // headline = document.getElementById('hestia-cand-email')
       // headline.innerHTML = result[saved_candidate_key]["candidate[headline]"][1]
