@@ -13,7 +13,7 @@
   position: fixed;
   top: 0;
   right: 0;
-  width: 50vw; /*TO DO: CHECK VIEW WIDTH OF EXTENSION*/
+  width: 35vw; /*TO DO: CHECK VIEW WIDTH OF EXTENSION*/
   height: 100vh;
   z-index: 3;
   background-color: #ffffff;
@@ -63,12 +63,14 @@
   text-transform: uppercase;
 }
 
-#hestiaDiv p {
+#hestiaDiv p,
+#hestiaDiv span {
   font-size: 16px;
   line-height: 20px;
   font-weight: 400;
   font-family: proxima-nova, sans-serif;
   margin-bottom: 16px;
+  display: inline-block;
 }
 
 #hestiaDiv .inner-header {
@@ -85,6 +87,13 @@
   margin-bottom: 0px;
 }
 
+#hestiaDiv .job-view-desc h2 {
+  margin-bottom: 8px;
+}
+
+#hestaDiv .location {
+  font-weight: 700;
+}
 /*------------Containers--------------*/
 #hestiaDiv .cta-container{
   width: 100%;
@@ -117,8 +126,11 @@
   padding: 0px 15px;
 }
 
-.accordion-toggle {
-  margin: 0px 15px;
+#hestiaDiv .job-view-desc span {
+  display: block;
+  width: 100%;
+  margin-bottom: 8px;
+  font-weight: 700;
 }
 
 /*----------Decorative staff----------*/
@@ -216,8 +228,60 @@
 }
 
 #hestiaDiv .back:hover {
-  /* text-decoration: underline; */
   background-size: 100% 100%;
+}
+
+#hestiaDiv .job-view-desc > .job-url {
+  color: #00756a;
+  text-decoration: none;
+  transition: all 0.5s ease-out;
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 700;
+}
+
+#hestiaDiv .job-view-desc > .job-url:after {
+  content: '>';
+  display: inline-block;
+  padding-left: 4px;
+}
+
+#hestiaDiv .job-view-desc > .job-url:hover {
+  text-decoration: underline;
+}
+
+/*-------------States----------------*/
+
+#hestiaDiv .job-state button{
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-block;
+  width: auto;
+  border: 2px solid #636d77;
+  border-radius: 12px;
+  line-height: 6px;
+  height: 26px;
+  margin: 8px 0px;
+  padding: 8px 8px 8px 32px;
+  min-width: 95px;
+  text-align: left;
+  pointer-events: none;
+}
+
+#hestiaDiv .job-state button.saved{
+  background-image: url('chrome-extension://__MSG_@@extension_id__/images/diskette.svg');
+  background-repeat: no-repeat;
+  background-size: 70% 70%;
+  background-position: -16px 3px;
+}
+
+#hestiaDiv .job-state button.applied{
+  background-image: url('chrome-extension://__MSG_@@extension_id__/images/favorite.svg');
+  background-repeat: no-repeat;
+  background-size: 70% 70%;
+  background-position: -16px 3px;
 }
 
 /*-------------Colors---------------*/
@@ -261,7 +325,7 @@
   to   { opacity: 1; }
 }
 
-
+/*------------Accordion-------------*/
 .accordion-toggle {
   display: block;
 }
@@ -272,4 +336,16 @@
 
 .accordion-content.active {
   display: block;
+}
+
+#hestiaDiv .accordion-toggle{
+  background-color: #f6fafd;
+  padding: 15px;
+  color: #333e49;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+  font-family: proxima-nova, sans-serif;
+  margin-bottom: 0px;
+  text-transform: none;
 }
