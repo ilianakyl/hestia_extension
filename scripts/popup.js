@@ -4,6 +4,12 @@ var id_from_spi_key = key => parseInt(key, 16) - 1234
 
 
 window.addEventListener('click', function (event){
+  // chrome.storage.sync.set({[`stage_applied`]: []}, function() {
+  //   console.log(job_stage_key_remove);
+  // });
+  // chrome.storage.sync.set({[`stage_saved`]: []}, function() {
+  //   console.log(job_stage_key_remove);
+  // });
     event.preventDefault;
 
     switch(event.target.id) {
@@ -105,13 +111,13 @@ function save_job(){
 
 function load_show(job_id){
     var hestia_div  = document.getElementById('hestiaDiv');
-
     fetch(chrome.extension.getURL("frames/show.html"))
     .then(response => response.text())
     .then(response => {
       hestia_div.innerHTML = response
     })
     .then(function() {
+
         render_saved_job(job_id)
     });
 }
@@ -145,14 +151,15 @@ function render_saved_job(job_id){
     chrome.storage.sync.get([job_stage_key], function(items) {
       if(typeof items[job_stage_key] !== 'undefined'){
       all_saved = items[job_stage_key]
-        chrome.storage.sync.get(null, function(items) {
-          var all_keys = Object.keys(items)
-        all_keys.forEach(function(key) {
-          if(all_saved.includes(key)){
-            state_element = document.getElementById('hestia-job-state')
+        // chrome.storage.sync.get([saved_job_key], function(items) {
+          // var all_keys = Object.keys(items)
+        // all_keys.forEach(function(saved_job_key) {
+          if(all_saved.includes(saved_job_key)){
+            var state_element = document.getElementById('hestia-job-state')
             state_element.classList.add('saved');
+            state_element.innerHTML = 'Saved'
         }else{
-          state_element = document.getElementById('hestia-job-state')
+          var state_element = document.getElementById('hestia-job-state')
           state_element.classList.remove('saved');
             state_element.classList.add('applied');
             state_element.innerHTML = 'Applied'
@@ -205,8 +212,8 @@ function render_saved_job(job_id){
     xhr2.setRequestHeader('Content-type', 'text/html');
     xhr2.send();
         }
-        })
-      })
+        // })
+      // })
     }
     })
 
@@ -423,14 +430,17 @@ function getCandidateInfo(event){
 
           chrome.storage.sync.get([job_stage_key_remove], function(result) {
             console.log('in')
-            new_list = result[job_stage_key]
+            new_list = result[job_stage_key_remove]
             if (typeof new_list == "undefined"){
               var new_list = [];
           }
           value = `saved_job_${job_id}`
+          debugger
           new_list = new_list.filter(function(item) { 
+            debugger
             return item !== value
         })
+        debugger
             chrome.storage.sync.set({[job_stage_key_remove]: new_list}, function() {
               console.log(job_stage_key_remove);
             });
@@ -438,9 +448,6 @@ function getCandidateInfo(event){
             
           });
 
-          arr = arr.filter(function(item) { 
-            return item !== value
-        })
         });
 }
 
