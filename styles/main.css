@@ -299,6 +299,10 @@
   background-size: 100% 100%;
 }
 
+#hestiaDiv .dashboard-back:hover {
+  background-size: 100% 100%;
+}
+
 #hestiaDiv .link-arrow {
   color: #00756a;
   text-decoration: none;
@@ -428,3 +432,16 @@
 #hestiaDiv .accordion-toggle ul {
   text-decoration: none;
 }
+
+
+/*------HIDE AND SICK CLASSES------*/
+
+#hestia-preparation-info,
+#hestia-candidate-info {
+  display: none;
+}
+
+.showdiv {
+  display: block !important;
+}
+

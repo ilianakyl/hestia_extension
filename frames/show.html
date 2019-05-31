@@ -21,28 +21,30 @@
             <a href=" " id="hestia-job-url" class="link-arrow">Job url</a>
             <p id="hestia-job-description"></p>
           </div>
-          <div class="interview-view-header inner-header">
-            <h1>Prepare for interview</h1>
+          <div id="hestia-preparation-info" class="showdiv"> <!--ADD CLASS showdiv TO DISPLAY THIS-->
+            <div class="interview-view-header inner-header">
+              <h1>Prepare for interview</h1>
+            </div>
+            <a href="#tips" class="accordion-toggle">Interview tips</a>
+            <div class="accordion-content" id="tips">
+              <ul>
+                <li><a href="" target="_blank" class="link-arrow">Tip 1 lorem ipsum</a></li>
+                <li><a href="" target="_blank" class="link-arrow">Tip 2 lorem ipsum</a></li>
+                <li><a href="" target="_blank" class="link-arrow">Tip 3 lorem ipsum</a></li>
+                <li></li>
+                <li></li>
+              </ul>
+            </div>
+            <a href="#tutorials" class="accordion-toggle">Promoted jobs</a>
+            <div class="accordion-content" id="tutorials">
+                <!-- <ul> -->
+                  <!-- <li><a href="" target="_blank" class="link-arrow">Tutorial 1 lorem ipsum</a></li>
+                  <li><a href="" target="_blank" class="link-arrow">Tutorial 2 lorem ipsum</a></li>
+                  <li><a href="" target="_blank" class="link-arrow">Tutorial 3 lorem ipsum</a></li> -->
+                <!-- </ul> -->
+            </div>
           </div>
-          <a href="#tips" class="accordion-toggle">Interview tips</a>
-          <div class="accordion-content" id="tips">
-            <ul>
-              <li><a href="" target="_blank" class="link-arrow">Tip 1 lorem ipsum</a></li>
-              <li><a href="" target="_blank" class="link-arrow">Tip 2 lorem ipsum</a></li>
-              <li><a href="" target="_blank" class="link-arrow">Tip 3 lorem ipsum</a></li>
-              <li></li>
-              <li></li>
-            </ul>
-          </div>
-          <a href="#tutorials" class="accordion-toggle">Promoted jobs</a>
-          <div class="accordion-content" id="tutorials">
-              <!-- <ul> -->
-                <!-- <li><a href="" target="_blank" class="link-arrow">Tutorial 1 lorem ipsum</a></li>
-                <li><a href="" target="_blank" class="link-arrow">Tutorial 2 lorem ipsum</a></li>
-                <li><a href="" target="_blank" class="link-arrow">Tutorial 3 lorem ipsum</a></li> -->
-              <!-- </ul> -->
-          </div>
-          <div id="hestia-candidate-info"> <!--HIDE THIS DIV IF THE USER HAS NOT APPLIED -->
+          <div id="hestia-candidate-info" class="showdiv"> <!--ADD CLASS showdiv TO DISPLAY THIS-->
             <div class="candidate-view-header inner-header">
               <h1>Candidate profile</h1>
             </div>
