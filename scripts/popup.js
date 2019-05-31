@@ -157,7 +157,7 @@ function render_saved_job(job_id){
       candidate_email = document.getElementById('hestia-cand-email')
       candidate_email.innerHTML = result[saved_candidate_key]["candidate[email]"][1]
 
-      date_applied = document.getElementById('hestia-cand-email')
+      date_applied = document.getElementById('hestia-date-applied')
       date_applied.innerHTML = new Date().toLocaleString()
 
       name = document.getElementById('hestia-cand-name')
