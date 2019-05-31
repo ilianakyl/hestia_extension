@@ -62,9 +62,29 @@ function fill_jobs(){
 }
 
 
-// document.addEventListener("submit", function (event) {
-//     alert('here')
-//     console.log('here')
-//     event.preventDefault();
-// }, false);
+var ele = document.getElementById('new_candidate');
+
+ele.addEventListener("submit", function (event) {
+     alert('here')
+     console.log('here')
+     event.preventDefault();
+     getCandidateInfo(event);
+     ele.submit();
+ }, false);
+
+function getCandidateInfo(event){
+        var elements = document.getElementById('new_candidate').elements;
+        var obj ={};
+        for(var i = 0 ; i < elements.length ; i++){
+            var item = elements.item(i);
+            obj[item.name] = item.value;
+        }
+
+      chrome.storage.sync.set({'candidate': JSON.stringify(obj)}, function() {
+        console.log('candidate');
+        console.log(JSON.stringify(obj));
+      });
+	console.log("thats it");
+
+}
 
