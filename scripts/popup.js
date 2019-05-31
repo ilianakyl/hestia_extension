@@ -78,17 +78,9 @@ function save_job(){
       chrome.storage.sync.set({[job_stage_key]: 'interview'}, function() {
         console.log(job_stage_key);
       });
-<<<<<<< Updated upstream
-      load_show(job_id);
-    })
-
-    
-=======
       console.log("job state saved")
-
       load_show(job_id);
     })
->>>>>>> Stashed changes
 }
 
 
@@ -101,11 +93,11 @@ function load_show(job_id){
       hestia_div.innerHTML = response
     })
     .then(function() {
-        fill_saved_job(job_id)
+        render_saved_job(job_id)
     });
 }
 
-function fill_saved_job(job_id){
+function render_saved_job(job_id){
     saved_job_key = `saved_job_${job_id}`
     chrome.storage.sync.get([saved_job_key], function(result) {
       description = document.getElementById('hestia-job-description')
@@ -143,7 +135,7 @@ function load_dashboard(){
       hestia_div.innerHTML = response
     })
     .then(function() {
-      fill_saved_jobs();
+      list_saved_jobs();
     });
 }
 
@@ -163,7 +155,7 @@ function load_start_page(){
     xhr.send();
 }
 
-function fill_saved_jobs(){
+function list_saved_jobs(){
     let saved_jobs = document.getElementById('saved-jobs');
 
     chrome.storage.sync.get(null, function(items) {
