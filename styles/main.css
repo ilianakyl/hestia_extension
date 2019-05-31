@@ -47,6 +47,7 @@
   margin-bottom: 32px;
   -webkit-animation: fadein 0.5s; /* Safari, Chrome and Opera > 12.1 */
   animation: fadein 0.5s;
+  padding-bottom: 0px;
 }
 
 #hestiaDiv h2 {
@@ -100,6 +101,7 @@
   font-weight: 700;
   font-family: proxima-nova, sans-serif;
   margin-bottom: 0px;
+  padding-bottom: 0px;
 }
 
 #hestiaDiv .job-view-desc h2 {
