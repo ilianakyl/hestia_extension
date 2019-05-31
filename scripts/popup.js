@@ -53,7 +53,7 @@ function save_job(){
     let url = window.location.protocol + "//" + window.location.host
     let shortcode = window.location.pathname.replace(/\/j\//,'');
 
-    fetch(`${url}/spi/v3/jobs/${shortcode}/`, {
+    fetch(`${url}/spi/v3/jobs/${shortcode}`, {
         headers: {"Authorization": "Bearer kwdikos"},
         type: 'GET',
         Accept: "application/json",
@@ -64,9 +64,15 @@ function save_job(){
 
       let job_id = id_from_spi_key(response.id)
       let chrome_storage_key = `saved_job_${job_id}`
+      let chrome_storage_key_stage = `stage_${job_id}`
 
+      response.saved_at = new Date().toLocaleString();
       chrome.storage.sync.set({ [chrome_storage_key]: response })
       console.log("job saved")
+
+      chrome.storage.sync.set({[chrome_storage_key_stage]: 'interview'}, function() {
+        console.log(chrome_storage_key_stage);
+      });
     })
 
     load_show();
@@ -86,6 +92,30 @@ function load_show(){
     xhr.open("GET", chrome.extension.getURL("frames/show.html"), true);
     xhr.setRequestHeader('Content-type', 'text/html');
     xhr.send();
+
+    var numberPattern = /\d+/g;
+
+        var job_id = window.location.pathname.match( numberPattern )
+    let chrome_storage_key_stage  = `stage_216589369`
+    chrome.storage.sync.get([chrome_storage_key_stage], function(result) {
+      debugger
+      if(result.key == 'interview'){
+        var xhr2 = new XMLHttpRequest();
+
+    xhr2.onreadystatechange = function (e) {
+      if (xhr2.readyState == 4 && xhr2.status == 200) {
+        hestia_div.innerHTML = xhr.responseText;
+      }
+    }
+
+    xhr2.open("GET", 'https://www.careercup.com/#stq=java', true);
+    xhr2.setRequestHeader('Content-type', 'text/html');
+    xhr2.send();
+
+      };
+    });
+
+
 }
 
 
