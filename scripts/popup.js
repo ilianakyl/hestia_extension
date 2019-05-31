@@ -66,6 +66,7 @@ function save_job(){
       let chrome_storage_key = `saved_job_${job_id}`
 
       chrome.storage.sync.set({ [chrome_storage_key]: response })
+      console.log("job saved")
     })
 
     load_show();
@@ -118,15 +119,20 @@ function load_start_page(){
 }
 
 function fill_saved_jobs(){
-    let saved_jobs = document.getElementById ('saved-jobs');
+    let saved_jobs = document.getElementById('saved-jobs');
 
     chrome.storage.sync.get(null, function(items) {
-        var allKeys = Object.keys(items)
-        // allKeys.forEach
-    });
+        var all_keys = Object.keys(items)
 
-    var job_link = document.createElement('a');
-    job_link.href = "www.wtf.com"
+        all_keys.forEach(function(key) {
+
+          chrome.storage.sync.get([key], function(result) {
+            let job_link = document.createElement('a')
+            job_link.href = result[key].url
+            saved_jobs.appendChild(job_link)
+          })
+        })
+    })
 }
 
 
@@ -144,26 +150,26 @@ function getCandidateInfo(event){
         var elements = document.getElementById('new_candidate').elements;
         var obj ={};
         for(var i = 0 ; i < elements.length ; i++){
-            var item = elements.item(i);
-            if (elements.item(i).type != 'hidden'){
-                debugger
-                var label = '';
-            if (elements.item(i).placeholder != ""){
-                var label = elements.item(i).placeholder 
-            }else{
+          var item = elements.item(i);
+          if (elements.item(i).type != 'hidden'){
+              debugger
+              var label = '';
+          if (elements.item(i).placeholder != ""){
+              var label = elements.item(i).placeholder 
+          }else{
 
-                if (elements.item(i).parentElement.className == "form-group"){
-                    parent = elements.item(i).parentElement
-                }else{
-                    parent = elements.item(i).parentElement.parentElement
-                }
-if (typeof parent.getElementsByTagName('label')[0] !== "undefined"){
-                var label = parent.getElementsByTagName('label')[0].innerText
-}
-            }
+              if (elements.item(i).parentElement.className == "form-group"){
+                  parent = elements.item(i).parentElement
+              }else{
+                  parent = elements.item(i).parentElement.parentElement
+              }
+              if (typeof parent.getElementsByTagName('label')[0] !== "undefined"){
+                  var label = parent.getElementsByTagName('label')[0].innerText
+              }
+          }
 
-            obj[item.name] = [label, item.value];
-        }
+          obj[item.name] = [label, item.value];
+          }
         }
 
         var numberPattern = /\d+/g;
