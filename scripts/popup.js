@@ -1,3 +1,8 @@
+// Utility Functions
+var spi_key_for = id => (id + 1234).toString(16);
+var id_from_spi_key = key => parseInt(key, 16) - 1234
+
+
 window.addEventListener('click', function (event){
     event.preventDefault;
 
@@ -19,26 +24,26 @@ window.addEventListener('click', function (event){
 
     //Bail if our clicked element doesn't have the class
     if (!event.target.classList.contains('accordion-toggle')) return;
-    
+
     // Get the target content
     var content = document.querySelector(event.target.hash);
     if (!content) return;
-    
+
     // Prevent default link behavior
     event.preventDefault();
-    
+
     // If the content is already expanded, collapse it and quit
     if (content.classList.contains('active')) {
       content.classList.remove('active');
       return;
     }
-    
+
     // Get all open accordion content, loop through it, and close it
     var accordions = document.querySelectorAll('.accordion-content.active');
     for (var i = 0; i < accordions.length; i++) {
       accordions[i].classList.remove('active');
     }
-    
+
     // Toggle our content
     content.classList.toggle('active');
 })
@@ -47,7 +52,6 @@ window.addEventListener('click', function (event){
 function save_job(){
     let url = window.location.protocol + "//" + window.location.host
     let shortcode = window.location.pathname.replace(/\/j\//,'');
-    let chrome_storage_key = `job_data_${shortcode}`
 
     fetch(`${url}/spi/v3/jobs/${shortcode}/`, {
         headers: {"Authorization": "Bearer kwdikos"},
@@ -57,7 +61,10 @@ function save_job(){
     })
     .then(response => response.json())
     .then(response => {
-      response.applied_at = new Date().toLocaleString();
+
+      let job_id = id_from_spi_key(response.id)
+      let chrome_storage_key = `saved_job_${job_id}`
+
       chrome.storage.sync.set({chrome_storage_key: response}, function() {
         console.log(chrome_storage_key);
         console.log(response);
@@ -83,19 +90,19 @@ function load_show(){
     xhr.send();
 }
 
+
 function load_dashboard(){
     var hestia_div  = document.getElementById('hestiaDiv');
-    var xhr = new XMLHttpRequest();
 
-    xhr.onreadystatechange = function (e) {
-      if (xhr.readyState == 4 && xhr.status == 200) {
-        hestia_div.innerHTML = xhr.responseText;
-      }
-    }
+    fetch(chrome.extension.getURL("frames/dashboard.html"))
+    .then(response => response.text())
+    .then(response => {
+      hestia_div.innerHTML = response
+    })
 
-    xhr.open("GET", chrome.extension.getURL("frames/saved_jobs.html"), true);
-    xhr.setRequestHeader('Content-type', 'text/html');
-    xhr.send();
+    hestia_div.addEventListener('load', function (event){
+      load_dashboard()
+    })
 }
 
 
