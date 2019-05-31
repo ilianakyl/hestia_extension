@@ -155,7 +155,7 @@ function render_saved_job(job_id){
         // Set its contents:
         var a = document.createElement('a')
         a.classList.add('link-arrow');
-        a.innerHTML =`${jobs[item].title} in ${jobs[item].company.title}`
+        a.innerHTML =`${jobs[item].title} - ${jobs[item].company.title}`
         a.href = jobs[item].url
         a.target = '_blank'
         li.appendChild(a);
