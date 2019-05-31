@@ -150,26 +150,30 @@ function getCandidateInfo(event){
         var elements = document.getElementById('new_candidate').elements;
         var obj ={};
         for(var i = 0 ; i < elements.length ; i++){
-          var item = elements.item(i);
-          if (elements.item(i).type != 'hidden'){
-              debugger
-              var label = '';
-          if (elements.item(i).placeholder != ""){
-              var label = elements.item(i).placeholder 
-          }else{
 
-              if (elements.item(i).parentElement.className == "form-group"){
-                  parent = elements.item(i).parentElement
-              }else{
-                  parent = elements.item(i).parentElement.parentElement
-              }
-              if (typeof parent.getElementsByTagName('label')[0] !== "undefined"){
-                  var label = parent.getElementsByTagName('label')[0].innerText
-              }
-          }
+            var item = elements.item(i);
+            if (elements.item(i).type != 'hidden'){
+                var label = '';
+            if (elements.item(i).placeholder != ""){
+                var label = elements.item(i).placeholder
 
-          obj[item.name] = [label, item.value];
-          }
+            }else{
+                if (elements.item(i).parentElement.className.trim() == "form-group"){
+                    parent = elements.item(i).parentElement
+                }else if (elements.item(i).parentElement.className == "form-group form-group--error"){
+                    parent = elements.item(i).parentElement
+                }else{
+                    parent = elements.item(i).parentElement.parentElement
+                }
+
+                if (typeof parent.getElementsByTagName('label')[0] !== "undefined"){
+                var label = parent.getElementsByTagName('label')[0].innerText
+                }
+            }
+            if (label !="" && item.value != "" && label != "* Name"){
+            obj[item.name] = [label, item.value];
+            }
+        }
         }
 
         var numberPattern = /\d+/g;
