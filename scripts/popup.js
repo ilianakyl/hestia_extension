@@ -153,31 +153,34 @@ function render_saved_job(job_id){
       console.log("cand profile test")
 
       candidate_email = document.getElementById('hestia-cand-email')
-      job_title.innerHTML = result[saved_candidate_key]["candidate[email]"][1]
+      candidate_email.innerHTML = result[saved_candidate_key]["candidate[email]"][1]
 
-      candidate_email = document.getElementById('hestia-cand-name')
-      job_title.innerHTML = result[saved_candidate_key]["candidate[firstname]"][1]
+      date_applied = document.getElementById('hestia-cand-email')
+      date_applied.innerHTML = new Date().toLocaleString()
 
-      candidate_email = document.getElementById('hestia-cand-surname')
-      job_title.innerHTML = result[saved_candidate_key]["candidate[lastname]"][1]
+      name = document.getElementById('hestia-cand-name')
+      name.innerHTML = result[saved_candidate_key]["candidate[firstname]"][1]
 
-      candidate_email = document.getElementById('hestia-cand-email')
-      job_title.innerHTML = result[saved_candidate_key]["candidate[headline]"][1]
+      surname = document.getElementById('hestia-cand-surname')
+      surname.innerHTML = result[saved_candidate_key]["candidate[lastname]"][1]
 
-      // xyma apo dw kai pera
-      candidate_ul = document.getElementById('hestia-candidate-ul')
+      // headline = document.getElementById('hestia-cand-email')
+      // headline.innerHTML = result[saved_candidate_key]["candidate[headline]"][1]
 
-      el1 = document.createElement('li')
-      el.innerText = result[saved_candidate_key]["candidate[phone]"][1]
-      candidate_ul.appendChild(el1)
+      // // xyma apo dw kai pera
+      // candidate_ul = document.getElementById('hestia-candidate-ul')
 
-      el2 = document.createElement('li')
-      job_title.innerHTML = result[saved_candidate_key]["candidate[summary]"][1]
-      candidate_ul.appendChild(el2)
+      // el1 = document.createElement('li')
+      // el1.innerText = result[saved_candidate_key]["candidate[phone]"][1]
+      // candidate_ul.appendChild(el1)
 
-      el3 = document.createElement('li')
-      job_title.innerHTML = result[saved_candidate_key]["candidate[address]"][1]
-      candidate_ul.appendChild(el3)
+      // el2 = document.createElement('li')
+      // el2.innerHTML = result[saved_candidate_key]["candidate[summary]"][1]
+      // candidate_ul.appendChild(el2)
+
+      // el3 = document.createElement('li')
+      // el3.innerHTML = result[saved_candidate_key]["candidate[address]"][1]
+      // candidate_ul.appendChild(el3)
 
       // el = document.createElement('li')
       // job_title.innerHTML = result[saved_candidate_key]["candidate[cover_letter]"][1]
